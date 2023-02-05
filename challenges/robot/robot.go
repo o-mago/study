@@ -4,17 +4,6 @@ import (
 	"strconv"
 )
 
-func robot() {
-	// commands := []string{"L", "R", "P", "3", "4"}
-	// expectedPosition := 0
-
-	// position := moveRobot(commands)
-	// fmt.Println(position)
-	// if expectedPosition != position {
-	// 	log.Fatalf("expected: %d, got: %d", expectedPosition, position)
-	// }
-}
-
 func MoveRobot(commands []string) int {
 	position := 0
 
