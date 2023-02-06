@@ -17,6 +17,7 @@ This approach uses a Doubly Linked List from the standard go library (it doesn't
 ## Final thoughts
 For the final thoughts it was calculated the time to run each algorithm, number of loops, the total memory allocated (cumulative, it won't decrease with garbage collection) and the total heap objects allocated.
 
+```
 ========= cards_slice =========
 time: 2.6255ms
 total memory allocated: 8473752
@@ -32,6 +33,7 @@ time: 7.1058ms
 total memory allocated: 10101696
 mallocs (cumulative count of heap objects allocated): 249659
 total loops: 99999
+```
 
 ### Time complexity:
 All 3 algorithms takes the same amount of loops, all O(n) time complexity, because it will iterate the same number as the number of cards.
@@ -48,6 +50,7 @@ On the other hand, the best when we talk about absolute memory is the linked lis
 And the approach using `containers/list` go standard library uses more space because it is a doubly linked list. So it stores more data because it has also the reference to the previous node (that's why it allocates almost the double of the space of the sinlgy linked list)
 
 About the slices approach we have a particularity. Slices are a reference type to a underlying array. So, when we reslice the slice (e.g. slice[1:]), we are not allocating space for a new array, we are just changing our first slice pointer to the second array element. So we won't be doubling our allocated memory everytime we reslice. We are also changing the length and the capacity of the slice (reducing it). 
+
 Go has a particular implementation to grow slices, as can be seen here: https://github.com/golang/go/blob/master/src/runtime/slice.go#L157
 Basically, if the capacity of the array is less than a threshold (256 for Go 1.20), it will double the capacity when we reach it adding a new element. If it is bigger than that it will do some magic (`newcap += (newcap + 3*threshold) / 4` and more stuff after), basically will be less than the double. This is why the slice approach uses more memory than our linked list approach.
 To give an example, for 1000 cards, the first slice will have a capacity of 510 and a length of 499 (because the way it grows). It's not 512 because when it grows from 256 it already do the magic operation, so it will be less.
