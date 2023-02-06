@@ -1,6 +1,10 @@
 version: '3'
 
 tasks:
+  setup:
+    cmds:
+      - go install github.com/go-task/task/v3/cmd/task@latest
+
   run:
     cmds:
       - go run . --file {{.CLI_ARGS}}
