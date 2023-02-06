@@ -17,9 +17,9 @@ func Giveaway(cards int) ([]int, int) {
 	giveawayCards := addCardsToQueue(cards, queue, &totalLoops)
 	giveawayRemainingCards(queue, &giveawayCards, &totalLoops)
 
-	remainderCard := queue.Front()
+	remainingCard := queue.Front()
 
-	return giveawayCards, remainderCard.Value.(int)
+	return giveawayCards, remainingCard.Value.(int)
 }
 
 func addCardsToQueue(cards int, queue *list.List, totalLoops *tools.PerformanceParam) []int {

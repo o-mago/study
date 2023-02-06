@@ -12,12 +12,11 @@ type PerformanceParam struct {
 }
 
 func Performance(name string, params ...*PerformanceParam) func() {
-	start := time.Now()
-
 	var m1, m2 runtime.MemStats
 	runtime.GC()
 	runtime.ReadMemStats(&m1)
 
+	start := time.Now()
 	return func() {
 		fmt.Printf("========= %s =========\n", name)
 		fmt.Println("time:", time.Since(start))

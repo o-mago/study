@@ -17,12 +17,11 @@ func Giveaway(cards int) ([]int, int) {
 	queue := Queue{}
 
 	giveawayCards := addCardsToQueue(cards, &queue, &totalLoops)
-	fmt.Println(queue)
 	giveawayRemainingCards(&queue, &giveawayCards, &totalLoops)
 
-	remainderCard := queue.dequeue()
+	remainingCard := queue.dequeue()
 
-	return giveawayCards, remainderCard
+	return giveawayCards, remainingCard
 }
 
 func (q *Queue) enqueue(value int) {
@@ -68,5 +67,7 @@ func giveawayRemainingCards(queue *Queue, giveawayCards *[]int, totalLoops *tool
 		*giveawayCards = append(*giveawayCards, givewayCard)
 		passCard := queue.dequeue()
 		queue.enqueue(passCard)
+		fmt.Println("len:", len(*queue))
+		fmt.Println("cap:", cap(*queue))
 	}
 }

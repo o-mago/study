@@ -16,9 +16,9 @@ func Giveaway(cards int) ([]int, int) {
 	giveawayCards := addCardsToQueue(cards, &queue, &totalLoops)
 	giveawayRemainingCards(&queue, &giveawayCards, &totalLoops)
 
-	remainderCard := queue.dequeue()
+	remainingCard := queue.dequeue()
 
-	return giveawayCards, remainderCard
+	return giveawayCards, remainingCard
 }
 
 type node struct {
