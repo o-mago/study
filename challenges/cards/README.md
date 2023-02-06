@@ -15,7 +15,7 @@ This approach uses a manual implementation of a singly linked list to store the 
 This approach uses a Doubly Linked List from the standard go library (it doesn't have a singly linked list). Basically it will do the same as the previous Linked List approach but with the go library implementation, also changing the the pointers to the previous nodes.
 
 ## Final thoughts
-For the final thoughts it was calculated the time to run each algorithm, number of loops, the total memory allocated (cumulative, it won't decrease with garbage collection) and the total heap objects allocated.
+For the final thoughts it was calculated the time to run each algorithm, number of loops, the total memory allocated (cumulative, it won't decrease with garbage collection) and the total heap objects allocated. All algorithms ran with 100000 cards.
 
 ```
 ========= cards_slice =========
