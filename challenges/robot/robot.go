@@ -7,20 +7,30 @@ import (
 func MoveRobot(commands []string) int {
 	position := 0
 
-	for index, command := range commands {
-		if command != "L" && command != "R" {
-			intCommand, err := strconv.Atoi(command)
-			if err != nil {
-				commands[index] = "E"
-				continue
-			}
-			commands[index] = commands[intCommand-1]
+	for index := range commands {
+		acceptedCommand, ok := getAcceptedCommand(commands, index)
+		commands[index] = acceptedCommand
+		if !ok {
+			continue
 		}
+
 		movement := getMovementByCommand(commands[index])
 		position += movement
 	}
 
 	return position
+}
+
+func getAcceptedCommand(commands []string, index int) (string, bool) {
+	if commands[index] != "L" && commands[index] != "R" {
+		intCommand, err := strconv.Atoi(commands[index])
+		if err != nil || intCommand > index+1 {
+			return "E", false
+		}
+		return commands[intCommand-1], true
+	}
+
+	return commands[index], true
 }
 
 func getMovementByCommand(command string) int {

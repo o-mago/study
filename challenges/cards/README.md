@@ -1,5 +1,4 @@
 ## About
-
 Algorithms to giveaway the first card of the deck, then pass the next to the bottom and so it goes until one remains
 It returns the giveaway cards in order and the remaining card
 3 approaches were chosen and will be compared here. All three approaches implement a queue in the end (it always removes cards from one end of the deck and adds to the other).
