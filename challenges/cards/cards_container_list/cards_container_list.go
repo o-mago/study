@@ -23,21 +23,19 @@ func Giveaway(cards int) ([]int, int) {
 }
 
 func addCardsToQueue(cards int, queue *list.List, totalLoops *tools.PerformanceParam) []int {
-	givewayCards := []int{}
+	giveawayCards := []int{}
 
-	for i := 1; i <= cards; i++ {
+	for i := 1; i <= cards; i += 2 {
 		if totalLoopsInt, ok := totalLoops.Value.(int); ok {
 			totalLoops.Value = totalLoopsInt + 1
 		}
-
-		if i%2 == 1 {
-			givewayCards = append(givewayCards, i)
-		} else {
-			queue.PushBack(i)
+		giveawayCards = append(giveawayCards, i)
+		if i < cards {
+			queue.PushBack(i + 1)
 		}
 	}
 
-	return givewayCards
+	return giveawayCards
 }
 
 func giveawayRemainingCards(queue *list.List, giveawayCards *[]int, totalLoops *tools.PerformanceParam) {

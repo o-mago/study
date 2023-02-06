@@ -22,7 +22,7 @@ func main() {
 	}
 
 	if *file == "cards_slice" || *file == "cards" {
-		cards_slice.Giveaway(1000)
+		cards_slice.Giveaway(100000)
 	}
 
 	if *file == "cards_linked_list" || *file == "cards" {

@@ -65,15 +65,13 @@ func (q *Queue) dequeue() int {
 func addCardsToQueue(cards int, queue *Queue, totalLoops *tools.PerformanceParam) []int {
 	giveawayCards := []int{}
 
-	for i := 1; i <= cards; i++ {
+	for i := 1; i <= cards; i += 2 {
 		if totalLoopsInt, ok := totalLoops.Value.(int); ok {
 			totalLoops.Value = totalLoopsInt + 1
 		}
-
-		if i%2 == 1 {
-			giveawayCards = append(giveawayCards, i)
-		} else {
-			queue.enqueue(i)
+		giveawayCards = append(giveawayCards, i)
+		if i < cards {
+			queue.enqueue(i + 1)
 		}
 	}
 

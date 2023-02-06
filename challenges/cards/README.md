@@ -18,23 +18,26 @@ This approach uses a Doubly Linked List from the standard go library (it doesn't
 For the final thoughts it was calculated the time to run each algorithm, number of loops, the total memory allocated (cumulative, it won't decrease with garbage collection) and the total heap objects allocated.
 
 ========= cards_slice =========
-time: 3.6728ms
-total memory allocated: 8875472
-mallocs (cumulative count of heap objects allocated): 149828
-total loops: 149999
+time: 2.6255ms
+total memory allocated: 8473752
+mallocs (cumulative count of heap objects allocated): 99824
+total loops: 99999
 ========= cards_linked_list =========
-time: 5.7463ms
-total memory allocated: 6904384
-mallocs (cumulative count of heap objects allocated): 249788
-total loops: 149999
+time: 4.7213ms
+total memory allocated: 6507680
+mallocs (cumulative count of heap objects allocated): 199793
+total loops: 99999
 ========= cards_container_list =========
-time: 6.8729ms
-total memory allocated: 10503296
-mallocs (cumulative count of heap objects allocated): 299661
-total loops: 149999
+time: 7.1058ms
+total memory allocated: 10101696
+mallocs (cumulative count of heap objects allocated): 249659
+total loops: 99999
 
 ### Time complexity:
-All 3 algorithms takes the same amount of loops, all O(logn) time complexity.
+All 3 algorithms takes the same amount of loops, all O(n) time complexity, because it will iterate the same number as the number of cards.
+We can think that we end one complete deck loop when we reach the bottom card. But we are jumping 2 cards every iteration. So we loop half of the deck size.
+With 1024 cards, we iterate 512 times, the new deck will have 512 cards, we iterate 256, so it goes, until 1. It happens because, considering only integer values, we have a number X and divide it by 2 until it becomes 1 and sum each of these division results + 1, it will always be this number.
+Y = X/2 + X/4 + X/8 + X/16 + X/32 + 1. Supose X/32 = 1, it's the last division, so Y = 16X/32 + 8X/32 + 4X/32 + 2X/32 + X/32 + X/32 = 32X/32 = X
 
 But if we look at the absolute values, we can see that the fastest algorithm is the one using slices. That happens because it has less commands in each iteration probably than a singly linked list and a doubly linked list. The singly linked list gets the second place because the doubly linked list takes more iterations probably to change references each iteration.
 
