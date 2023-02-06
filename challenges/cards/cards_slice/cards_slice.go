@@ -1,7 +1,6 @@
 package cards_slice
 
 import (
-	"fmt"
 	"main/tools"
 )
 
@@ -67,7 +66,7 @@ func giveawayRemainingCards(queue *Queue, giveawayCards *[]int, totalLoops *tool
 		*giveawayCards = append(*giveawayCards, givewayCard)
 		passCard := queue.dequeue()
 		queue.enqueue(passCard)
-		fmt.Println("len:", len(*queue))
-		fmt.Println("cap:", cap(*queue))
+		// fmt.Println("len:", len(*queue))
+		// fmt.Println("cap:", cap(*queue))
 	}
 }
