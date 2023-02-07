@@ -1,37 +1,45 @@
 ## About
-Algorithms to giveaway the first card of the deck, then pass the next to the bottom and so it goes until one remains
-It returns the giveaway cards in order and the remaining card
-3 approaches were chosen and will be compared here. All three approaches implement a queue in the end (it always removes cards from one end of the deck and adds to the other).
-The first iteration that will convert to number of cards already starts giving away half of the cards to make the process faster.
+Algorithms to remove the first card of the deck, then pass the next to the bottom and so it goes until one remains
+It returns the removed cards in order and the remaining card
+4 approaches were chosen and will be compared here. All three approaches implement a queue in the end (it always removes cards from one end of the deck and adds to the other).
+The first iteration that will convert the number of cards, already starts removing half of the cards to make the process faster.
 
 ## Slices
-This approach uses a slice to store the queue data. Basically it will take the first item of the slice to be appended in the `giveawayCards` slice and then re-slice it starting from the element with index 1.
+This approach uses a slice to store the queue data. Basically it will take the first item of the slice to be appended in the `removedCards` slice and then re-slice it starting from the element with index 1.
 Again it will get the first item and re-slice it starting from the index 1 but this element will be appended at the end of the queue slice.
 
 ## Linked List
-This approach uses a manual implementation of a singly linked list to store the queue data. Basically it will take the head of the list to be appended in the `giveawayCards`, the head will be replace with the next node. Then the new head will become the new tail of the list.
+This approach uses a manual implementation of a singly linked list to store the queue data. Basically it will take the head of the list to be appended in the `removedCards`, the head will be replace with the next node. Then the new head will become the new tail of the list.
 
 ## Container List
 This approach uses a Doubly Linked List from the standard go library (it doesn't have a singly linked list). Basically it will do the same as the previous Linked List approach but with the go library implementation, also changing the the pointers to the previous nodes.
+
+## Channel
+This approach uses a int channel. It will remove the element from the channel when removing the card and put the element in the channel when reordering the card to the bottom of the deck
 
 ## Final thoughts
 For the final thoughts it was calculated the time to run each algorithm, number of loops, the total memory allocated (cumulative, it won't decrease with garbage collection) and the total heap objects allocated. All algorithms ran with 100000 cards.
 
 ```
 ========= cards_slice =========
-time: 2.6255ms
-total memory allocated: 8473752
-mallocs (cumulative count of heap objects allocated): 99824
+time: 3.1406ms
+total memory allocated: 8475456
+mallocs (cumulative count of heap objects allocated): 99828
 total loops: 99999
 ========= cards_linked_list =========
-time: 4.7213ms
-total memory allocated: 6507680
-mallocs (cumulative count of heap objects allocated): 199793
+time: 4.2351ms
+total memory allocated: 6505984
+mallocs (cumulative count of heap objects allocated): 199790
 total loops: 99999
 ========= cards_container_list =========
-time: 7.1058ms
-total memory allocated: 10101696
-mallocs (cumulative count of heap objects allocated): 249659
+time: 7.3152ms
+total memory allocated: 10502360
+mallocs (cumulative count of heap objects allocated): 299537
+total loops: 99999
+========= cards_channel =========
+time: 3.6772ms
+total memory allocated: 4902608
+mallocs (cumulative count of heap objects allocated): 99785
 total loops: 99999
 ```
 

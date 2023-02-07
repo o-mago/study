@@ -3,9 +3,7 @@ package main
 import (
 	"flag"
 	"main/analysis"
-	"main/challenges/cards/cards_container_list"
-	"main/challenges/cards/cards_linked_list"
-	"main/challenges/cards/cards_slice"
+	"main/challenges/cards"
 	"main/challenges/robot"
 )
 
@@ -22,14 +20,18 @@ func main() {
 	}
 
 	if *file == "cards_slice" || *file == "cards" {
-		cards_slice.Giveaway(100000)
+		cards.CardsSlice(100000)
 	}
 
 	if *file == "cards_linked_list" || *file == "cards" {
-		cards_linked_list.Giveaway(100000)
+		cards.CardsLinkedList(100000)
 	}
 
 	if *file == "cards_container_list" || *file == "cards" {
-		cards_container_list.Giveaway(100000)
+		cards.CardsContainerList(100000)
+	}
+
+	if *file == "cards_channel" || *file == "cards" {
+		cards.CardsChannel(100000)
 	}
 }
