@@ -3,7 +3,7 @@ Study codes, tests and performance analysis
 
 ## Run setup (install dependencies to make the project work) - only once
 
-`task setup`
+`go install github.com/go-task/task/v3/cmd/task@latest`
 
 ## Run a challenge file code
 
