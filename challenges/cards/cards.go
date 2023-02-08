@@ -49,11 +49,11 @@ func removeRemainingCards(q queue.Queue[int], removedCards *[]int, totalLoops *t
 			totalLoops.Value = totalLoopsInt + 1
 		}
 
-		givewayCard, err := q.Dequeue()
+		removeCard, err := q.Dequeue()
 		if err != nil {
 			log.Fatal(err)
 		}
-		*removedCards = append(*removedCards, givewayCard)
+		*removedCards = append(*removedCards, removeCard)
 		passCard, err := q.Dequeue()
 		if err != nil {
 			log.Fatal(err)
