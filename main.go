@@ -34,4 +34,12 @@ func main() {
 	if *file == "cards_channel" || *file == "cards" {
 		cards.CardsChannel(100000)
 	}
+
+	if *file == "cards_recursive" || *file == "cards" {
+		cards.CardsRecursive(100000, "recursive")
+	}
+
+	if *file == "cards_loop" || *file == "cards" {
+		cards.CardsSliceLoop(100000, "loop")
+	}
 }
