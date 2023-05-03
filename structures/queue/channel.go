@@ -13,6 +13,7 @@ func NewChannelQueue[T any](capacity int) Queue[T] {
 func (q *ChannelQueue[T]) Len() int {
 	return len(q.channel)
 }
+
 func (q *ChannelQueue[T]) Enqueue(value T) error {
 	select {
 	case q.channel <- value:

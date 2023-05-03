@@ -24,6 +24,7 @@ func Performance(name string, params ...*PerformanceParam) func() {
 		runtime.ReadMemStats(&m2)
 		fmt.Println("total memory allocated:", m2.TotalAlloc-m1.TotalAlloc)
 		fmt.Println("mallocs (cumulative count of heap objects allocated):", m2.Mallocs-m1.Mallocs)
+		fmt.Println("stack in use", m1.StackInuse)
 
 		for _, param := range params {
 			fmt.Printf("%s: %v\n", param.Name, param.Value)
