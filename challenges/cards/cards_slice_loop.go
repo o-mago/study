@@ -1,48 +1,43 @@
 package cards
 
-import (
-	"main/tools"
-)
+import "main/tools"
 
 type actionLoop bool
 
 const REMOVE_LOOP actionLoop = true
 const MOVE_LOOP actionLoop = false
 
-func CardsSliceLoop(cards int, name string) ([]int, int) {
-	totalLoops := tools.PerformanceParam{
-		Name:  "total loops",
-		Value: 0,
-	}
-	defer tools.Performance(name, &totalLoops)()
+func CardsSliceLoopCall(cards int, perf *tools.Performance) {
+	CardsSliceLoop(cards, "loop", perf)
+}
 
-	cardsSlice := addCardsToSliceLoop(cards, &totalLoops)
-	removedCards, remainingCard := removeRemainingCardsLoop(cardsSlice, []int{}, REMOVE_LOOP, &totalLoops)
+func CardsSliceLoop(cards int, name string, perf *tools.Performance) ([]int, int) {
+	perf.AddToParam("total loops", 0)
+
+	cardsSlice := addCardsToSliceLoop(cards, perf)
+	removedCards, remainingCard := removeRemainingCardsLoop(cardsSlice, []int{}, REMOVE_LOOP, perf)
 
 	return removedCards, remainingCard
 }
 
-func addCardsToSliceLoop(cards int, totalLoops *tools.PerformanceParam) []int {
+func addCardsToSliceLoop(cards int, perf *tools.Performance) []int {
 	cardsSlice := []int{}
 
 	for i := 1; i <= cards; i++ {
-		if totalLoopsInt, ok := totalLoops.Value.(int); ok {
-			totalLoops.Value = totalLoopsInt + 1
-		}
+		perf.AddToParam("total loops", 1)
+
 		cardsSlice = append(cardsSlice, i)
 	}
 
 	return cardsSlice
 }
 
-func removeRemainingCardsLoop(cardsSlice []int, removedCards []int, act actionLoop, totalLoops *tools.PerformanceParam) ([]int, int) {
+func removeRemainingCardsLoop(cardsSlice []int, removedCards []int, act actionLoop, perf *tools.Performance) ([]int, int) {
 	remainingCards := []int{}
 
 	for len(cardsSlice) > 1 {
 		for _, card := range cardsSlice {
-			if totalLoopsInt, ok := totalLoops.Value.(int); ok {
-				totalLoops.Value = totalLoopsInt + 1
-			}
+			perf.AddToParam("total loops", 1)
 
 			if act == REMOVE_LOOP {
 				removedCards = append(removedCards, card)

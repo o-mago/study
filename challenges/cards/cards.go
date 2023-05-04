@@ -6,15 +6,11 @@ import (
 	"main/tools"
 )
 
-func Cards(cards int, q queue.Queue[int], name string) ([]int, int) {
-	totalLoops := tools.PerformanceParam{
-		Name:  "total loops",
-		Value: 0,
-	}
-	defer tools.Performance(name, &totalLoops)()
+func Cards(cards int, q queue.Queue[int], perf *tools.Performance) ([]int, int) {
+	perf.AddToParam("total loops", 0)
 
-	removedCards := addCardsToQueue(cards, q, &totalLoops)
-	removeRemainingCards(q, &removedCards, &totalLoops)
+	removedCards := addCardsToQueue(cards, q, perf)
+	removeRemainingCards(q, &removedCards, perf)
 
 	remainingCard, err := q.Dequeue()
 	if err != nil {
@@ -24,13 +20,12 @@ func Cards(cards int, q queue.Queue[int], name string) ([]int, int) {
 	return removedCards, remainingCard
 }
 
-func addCardsToQueue(cards int, queue queue.Queue[int], totalLoops *tools.PerformanceParam) []int {
+func addCardsToQueue(cards int, queue queue.Queue[int], perf *tools.Performance) []int {
 	removedCards := []int{}
 
 	for i := 1; i <= cards; i += 2 {
-		if totalLoopsInt, ok := totalLoops.Value.(int); ok {
-			totalLoops.Value = totalLoopsInt + 1
-		}
+		perf.AddToParam("total loops", 1)
+
 		removedCards = append(removedCards, i)
 		if i < cards {
 			err := queue.Enqueue(i + 1)
@@ -43,11 +38,9 @@ func addCardsToQueue(cards int, queue queue.Queue[int], totalLoops *tools.Perfor
 	return removedCards
 }
 
-func removeRemainingCards(q queue.Queue[int], removedCards *[]int, totalLoops *tools.PerformanceParam) {
+func removeRemainingCards(q queue.Queue[int], removedCards *[]int, perf *tools.Performance) {
 	for q.Len() > 1 {
-		if totalLoopsInt, ok := totalLoops.Value.(int); ok {
-			totalLoops.Value = totalLoopsInt + 1
-		}
+		perf.AddToParam("total loops", 1)
 
 		removeCard, err := q.Dequeue()
 		if err != nil {

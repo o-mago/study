@@ -2,8 +2,9 @@ package cards
 
 import (
 	"main/structures/queue"
+	"main/tools"
 )
 
-func CardsChannel(cards int) ([]int, int) {
-	return Cards(cards, queue.NewChannelQueue[int](cards/2), "cards_channel")
+func CardsChannel(cards int, perf *tools.Performance) {
+	Cards(cards, queue.NewChannelQueue[int](cards/2), perf)
 }

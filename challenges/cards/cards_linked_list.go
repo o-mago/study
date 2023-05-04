@@ -2,8 +2,9 @@ package cards
 
 import (
 	"main/structures/queue"
+	"main/tools"
 )
 
-func CardsLinkedList(cards int) ([]int, int) {
-	return Cards(cards, queue.NewLinkedListQueue[int](), "cards_linked_list")
+func CardsLinkedList(cards int, perf *tools.Performance) {
+	Cards(cards, queue.NewLinkedListQueue[int](), perf)
 }

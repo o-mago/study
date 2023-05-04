@@ -2,8 +2,9 @@ package cards
 
 import (
 	"main/structures/queue"
+	"main/tools"
 )
 
-func CardsContainerList(cards int) ([]int, int) {
-	return Cards(cards, queue.NewContainerListQueue[int](), "cards_container_list")
+func CardsContainerList(cards int, perf *tools.Performance) {
+	Cards(cards, queue.NewContainerListQueue[int](), perf)
 }
