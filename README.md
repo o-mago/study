@@ -1,5 +1,5 @@
 # About
-Study codes, tests and performance analysis
+Study codes, tests and performance analysis.
 
 ## Run setup (install dependencies to make the project work) - only once
 
