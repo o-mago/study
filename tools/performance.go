@@ -53,8 +53,6 @@ func preparePerf() (*runtime.MemStats, time.Time) {
 
 func (p *Performance) addPerf(m1 *runtime.MemStats, start time.Time) {
 	m2 := new(runtime.MemStats)
-
-	runtime.GC()
 	runtime.ReadMemStats(m2)
 
 	p.Time += time.Since(start)
