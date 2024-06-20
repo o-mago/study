@@ -5,5 +5,5 @@ import (
 )
 
 func CardsChannel(cards int) ([]int, int) {
-	return Cards(cards, queue.NewChannelQueue[int](cards/2), "cards_channel")
+	return Cards(cards, queue.NewChannelQueue[int](cards), "cards_channel")
 }

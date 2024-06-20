@@ -27,16 +27,14 @@ func Cards(cards int, q queue.Queue[int], name string) ([]int, int) {
 func addCardsToQueue(cards int, queue queue.Queue[int], totalLoops *tools.PerformanceParam) []int {
 	removedCards := []int{}
 
-	for i := 1; i <= cards; i += 2 {
+	for i := 1; i <= cards; i++ {
 		if totalLoopsInt, ok := totalLoops.Value.(int); ok {
 			totalLoops.Value = totalLoopsInt + 1
 		}
-		removedCards = append(removedCards, i)
-		if i < cards {
-			err := queue.Enqueue(i + 1)
-			if err != nil {
-				log.Fatal(err)
-			}
+
+		err := queue.Enqueue(i)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 
